@@ -1,17 +1,15 @@
 # Reproducing the paper                                          
 # ENet - Fast Scene Understanding for Autonomous Driving                         
-# Paper: https://arxiv.org/pdf/1708.02550.pdf                                             
+# Paper: https://arxiv.org/pdf/1708.02550.pdf                                            
 ##################################################################
-
 import torch
 import torch.nn as nn
-from .InitialBlock import InitialBlock
-from .RDDNeck import RDDNeck
-from .UBNeck import UBNeck
-from .ASNeck import ASNeck
-from .BranchedModule import BranchedModule
+from models.RDDNeck import RDDNeck
+from models.UBNeck import UBNeck
+from models.ASNeck import ASNeck
+from models.InitialBlock import InitialBlock
 
-class BranchedENet(nn.Module):
+class ENetEncoder(nn.Module):
     def __init__(self, C):
         super().__init__()
         
@@ -97,7 +95,6 @@ class BranchedENet(nn.Module):
                            out_channels=128, 
                            down_flag=False)
         
-        self.branch = BranchedModule(C)
         
         
     def forward(self, x):
@@ -111,6 +108,16 @@ class BranchedENet(nn.Module):
         x = self.b12(x)
         x = self.b13(x)
         x = self.b14(x)
-        x = self.branch(X)
+        
+        # the second bottleneck
+        x, i2 = self.b20(x)
+        x = self.b21(x)
+        x = self.b22(x)
+        x = self.b23(x)
+        x = self.b24(x)
+        x = self.b25(x)
+        x = self.b26(x)
+        x = self.b27(x)
+        x = self.b28(x)
             
-        return x
+        return x, i1, i2

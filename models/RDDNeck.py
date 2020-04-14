@@ -5,7 +5,7 @@
 ##################################################################
 
 import torch
-import torch.nn
+import torch.nn as nn
 
 class RDDNeck(nn.Module):
     def __init__(self, dilation, in_channels, out_channels, down_flag, relu=False, projection_ratio=4, p=0.1):

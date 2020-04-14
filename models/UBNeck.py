@@ -5,7 +5,7 @@
 ##################################################################
 
 import torch
-import torch.nn
+import torch.nn as nn
 
 class UBNeck(nn.Module):
     

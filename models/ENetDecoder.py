@@ -5,11 +5,11 @@
 
 import torch
 import torch.nn as nn
-from .RDDNeck import RDDNeck
-from .UBNeck import UBNeck
-from .ASNeck import ASNeck
+from models.RDDNeck import RDDNeck
+from models.UBNeck import UBNeck
+from models.ASNeck import ASNeck
 
-class ENetBranch(nn.Module):
+class ENetDecoder(nn.Module):
     # Creating Branch of BranchedEnet model!
   
     def __init__(self, C):
@@ -98,7 +98,7 @@ class ENetBranch(nn.Module):
                                            bias=False)
         
         
-    def forward(self, x):
+    def forward(self, x, i1, i2):
         
        
         # The third bottleneck
