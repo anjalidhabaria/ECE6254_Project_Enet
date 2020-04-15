@@ -6,6 +6,7 @@
 
 import torch
 import torch.nn as nn
+from copy import deepcopy
 
 class RDDNeck(nn.Module):
     def __init__(self, dilation, in_channels, out_channels, down_flag, relu=False, projection_ratio=4, p=0.1):
@@ -71,7 +72,7 @@ class RDDNeck(nn.Module):
                                bias = False,
                                dilation = 1)
         
-        self.prelu1 = activation
+        self.prelu1 = deepcopy(activation)
         
         self.conv2 = nn.Conv2d(in_channels = self.reduced_depth,
                                   out_channels = self.reduced_depth,
@@ -81,7 +82,7 @@ class RDDNeck(nn.Module):
                                   bias = True,
                                   dilation = self.dilation)
                                   
-        self.prelu2 = activation
+        self.prelu2 = deepcopy(activation)
         
         self.conv3 = nn.Conv2d(in_channels = self.reduced_depth,
                                   out_channels = self.out_channels,
@@ -91,7 +92,7 @@ class RDDNeck(nn.Module):
                                   bias = False,
                                   dilation = 1)
         
-        self.prelu3 = activation
+        self.prelu3 = deepcopy(activation)
         
         self.batchnorm = nn.BatchNorm2d(self.reduced_depth)
         self.batchnorm2 = nn.BatchNorm2d(self.out_channels)
