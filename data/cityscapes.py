@@ -193,13 +193,14 @@ class Cityscapes(data.Dataset):
         img,label,inst,dpth = self.loader(data_path, label_path, inst_path, dpth_path)
 
         # # Remap class labels
-        # label = utils.remap(label, self.full_classes, self.new_classes)
+        label = utils.remap(label, self.full_classes, self.new_classes)
 
         img = self.transform(img)
         label = self.transform(label)
         inst = self.transform(inst)
         dpth = self.transform(dpth)
 
+        inst[label!=14] = 0
 
         # # if self.transform is not None:
         # #     img = self.transform(img)
