@@ -188,8 +188,6 @@ class Cityscapes(data.Dataset):
 
         #print(data_path, label_path, inst_path, dpth_path)
 
-
-
         img,label,inst,dpth = self.loader(data_path, label_path, inst_path, dpth_path)
 
         # # Remap class labels
@@ -201,6 +199,8 @@ class Cityscapes(data.Dataset):
         dpth = self.transform(dpth)
 
         inst[label!=14] = 0
+
+        # # split data into two layer tensor
 
         # # if self.transform is not None:
         # #     img = self.transform(img)
