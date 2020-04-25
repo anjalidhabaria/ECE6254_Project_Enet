@@ -186,7 +186,7 @@ class Cityscapes(data.Dataset):
             raise RuntimeError("Unexpected dataset mode. "
                                "Supported modes are: train, val and test")
 
-        #print(data_path, label_path, inst_path, dpth_path)
+        print(dpth_path)
 
         img,label,inst,dpth = self.loader(data_path, label_path, inst_path, dpth_path)
 
